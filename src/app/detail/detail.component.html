@@ -1,0 +1,40 @@
+<div class="potato-details">
+  <mat-card>
+    <mat-card-header>
+            <span *ngIf="localPotato.id !== -1; else prompt">
+              <mat-card-title>
+                Currently Editing: {{localPotato.name}}
+              </mat-card-title>
+            </span>
+      <ng-template #prompt>
+        <mat-card-title>
+          {{title}}
+        </mat-card-title>
+      </ng-template>
+    </mat-card-header>
+    <form #form="ngForm" (ngSubmit)="savePotato(localPotato)">
+      <mat-card-content>
+        <mat-form-field>
+          <span class="spacer"></span>
+          <input matInput name="name" required minlength="1" type="text"
+                 [(ngModel)]="localPotato.name" placeholder="Name"/>
+          <span class="spacer"></span>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="cookTime" required minlength="1" type="number" min="1"
+                 [(ngModel)]="localPotato.cookTime" placeholder="Cook Time (min)"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="seasoning" required minlength="1" type="text"
+                 [(ngModel)]="localPotato.seasoning" placeholder="Seasoning"/>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="submit" [disabled]="form.invalid" mat-button color="accent">
+          {{ localPotato.id == -1 ? 'Create' : 'Save' }}
+        </button>
+        <button type="button" mat-button (click)="reset()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
