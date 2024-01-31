@@ -1,0 +1,29 @@
+<div class="potato-containers">
+  <div class="potato-list">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ title }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngFor="let potato of potatoList">
+        <mat-action-list disableRipple>
+          <div class="flex-box">
+            <button mat-list-item class="potato-item" (click)="selectPotato(potato)">
+              <p matLine>Name: {{potato.name}}</p>
+              <p matLine>Cook Time: {{potato.cookTime}} min</p>
+              <p matLine>Seasoning: {{potato.seasoning}}</p>
+            </button>
+            <button mat-button color="warn" class="potato-item text-center"
+                    (click)="deletePotato(potato); $event.stopImmediatePropagation()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-action-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <app-detail [selectedPotato]="currentPotato"
+              [potatoList]="potatoList"
+              (onPotatoSave)="handlePotatoUpdate($event)"/>
+</div>
